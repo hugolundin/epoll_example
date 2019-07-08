@@ -2,36 +2,19 @@
 #define _GNU_SOURCE
 #define _POSIX_C_SOURCE 201805L
 
-#include <syslog.h>
-#include <errno.h>
-#include <stdbool.h>
-#include <string.h>
-#include <sys/epoll.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <sys/signalfd.h>
-#include <sys/timerfd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <mqueue.h>
 #include <assert.h>
-#include <signal.h>
-#include <time.h>
 #include <errno.h>
-#include <time.h>
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <syslog.h>
-#include <unistd.h>
+#include <string.h>
 #include <sys/epoll.h>
 #include <sys/timerfd.h>
+#include <syslog.h>
+#include <time.h>
 
 #include "epoll_example.h"
 
-
-
-static int epoll_event_timerfd (
+static int epoll_event_dispatch_timerfd (
     struct app_s * app,
     struct epoll_event * event
 )
@@ -102,7 +85,7 @@ static int epoll_event_dispatch (
     );
 
     if (event->data.fd == app->timerfd) {
-        return epoll_event_timerfd(app, event);
+        return epoll_event_dispatch_timerfd(app, event);
     }
 
     syslog(LOG_ERR,
@@ -247,4 +230,6 @@ int main(int argc, char const *argv[])
         __FILE__, __LINE__, __func__
     );
     return 0;
+    (void) argv;
+    (void) argc;
 }

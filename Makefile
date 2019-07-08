@@ -9,11 +9,12 @@
 CFLAGS         = -Iinclude -Iinc -Isrc -Wall -Wextra \
                  -Wno-implicit-fallthrough -Wno-unused-const-variable \
                  -std=c11 -g3 -Os -D_FORTIFY_SOURCE=2 -fexceptions \
-                 -fasynchronous-unwind-tables -fpie -Wl,-pie \
+                 -fasynchronous-unwind-tables -fpie \
                  -fstack-protector-strong -grecord-gcc-switches \
                  -Werror=format-security \
-                 -Werror=implicit-function-declaration -Wl,-z,defs -Wl,-z,now \
-                 -Wl,-z,relro $(EXTRA_CFLAGS)
+                 -Werror=implicit-function-declaration \
+				 -Wno-missing-field-initializers
+                 $(EXTRA_CFLAGS)
 LDFLAGS        = $(EXTRA_LDFLAGS)
 LDLIBS         = $(EXTRA_LDLIBS)
 DESTDIR        = /
